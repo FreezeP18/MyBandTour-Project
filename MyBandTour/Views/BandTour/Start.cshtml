@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Start</title>
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/js/logica.js"></script>
+    <script src="~/Scripts/js/funcionalidad.js"></script>
+    <link href="~/Content/css/estilos.css" rel="stylesheet" />
+</head>
+<body onload="VerConciertos()">
+    <div> 
+        <header>
+            <img src="~/Content/BandTour.png" alt="logo" />
+            <div id="moduloLogin">
+                <h3>Iniciar sesion</h3>
+                <input type="text" id="usuario" placeholder="Digite su usuario" />
+                <br /><br />
+                <input type="password" id="contrasena" placeholder="Digite su contraseña" />
+                <br /><br />
+                <button onclick="Autenticar();">Entrar</button>
+                <button onclick="ocultarLogin();">Cerrar</button>
+            </div>
+            <div id="toggleLogin">Iniciar sesión</div>
+        </header>
+    </div>
+    <div id="buscar">
+        <h4>Buscar:</h4>
+        <input type="text" id="buscarBanda" placeholder="Indique el nombre de la banda" onkeyup="filtrarConciertos()" />
+        <table id="conciertosTable" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Banda</th>
+                    <th>Género Musical</th>
+                    <th>Fecha del Concierto</th>
+                    <th>Hora del Concierto</th>
+                    <th>País</th>
+                    <th>Dirección</th>
+                </tr>
+            </thead>
+            <tbody id="bodyTable">
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

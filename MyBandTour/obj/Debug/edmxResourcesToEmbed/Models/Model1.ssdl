@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyBandTourModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bandas">
+    <Key>
+      <PropertyRef Name="BandaID" />
+    </Key>
+    <Property Name="BandaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="GeneroMusical" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Conciertos">
+    <Key>
+      <PropertyRef Name="ConciertoID" />
+    </Key>
+    <Property Name="ConciertoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BandaID" Type="int" Nullable="false" />
+    <Property Name="FechaConcierto" Type="varchar" MaxLength="10" />
+    <Property Name="HoraConcierto" Type="varchar" MaxLength="5" />
+    <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Concierto__Banda__398D8EEE">
+    <End Role="Bandas" Type="Self.Bandas" Multiplicity="1" />
+    <End Role="Conciertos" Type="Self.Conciertos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bandas">
+        <PropertyRef Name="BandaID" />
+      </Principal>
+      <Dependent Role="Conciertos">
+        <PropertyRef Name="BandaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_CrearConcierto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BandaID" Type="int" Mode="In" />
+    <Parameter Name="FechaConcierto" Type="varchar" Mode="In" />
+    <Parameter Name="HoraConcierto" Type="varchar" Mode="In" />
+    <Parameter Name="Pais" Type="varchar" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_EliminarConcierto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ConciertoID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ModificarConcierto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ConciertoID" Type="int" Mode="In" />
+    <Parameter Name="BandaID" Type="int" Mode="In" />
+    <Parameter Name="FechaConcierto" Type="varchar" Mode="In" />
+    <Parameter Name="HoraConcierto" Type="varchar" Mode="In" />
+    <Parameter Name="Pais" Type="varchar" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_VerConciertos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="MyBandTourModelStoreContainer">
+    <EntitySet Name="Bandas" EntityType="Self.Bandas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Conciertos" EntityType="Self.Conciertos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Concierto__Banda__398D8EEE" Association="Self.FK__Concierto__Banda__398D8EEE">
+      <End Role="Bandas" EntitySet="Bandas" />
+      <End Role="Conciertos" EntitySet="Conciertos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

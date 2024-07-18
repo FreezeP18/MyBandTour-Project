@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyBandTourModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bandas">
+    <Key>
+      <PropertyRef Name="BandaID" />
+    </Key>
+    <Property Name="BandaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GeneroMusical" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Conciertos" Relationship="Self.FK__Concierto__Banda__398D8EEE" FromRole="Bandas" ToRole="Conciertos" />
+  </EntityType>
+  <EntityType Name="Conciertos">
+    <Key>
+      <PropertyRef Name="ConciertoID" />
+    </Key>
+    <Property Name="ConciertoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BandaID" Type="Int32" Nullable="false" />
+    <Property Name="FechaConcierto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="HoraConcierto" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Bandas" Relationship="Self.FK__Concierto__Banda__398D8EEE" FromRole="Conciertos" ToRole="Bandas" />
+  </EntityType>
+  <Association Name="FK__Concierto__Banda__398D8EEE">
+    <End Role="Bandas" Type="Self.Bandas" Multiplicity="1" />
+    <End Role="Conciertos" Type="Self.Conciertos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bandas">
+        <PropertyRef Name="BandaID" />
+      </Principal>
+      <Dependent Role="Conciertos">
+        <PropertyRef Name="BandaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyBandTourEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bandas" EntityType="Self.Bandas" />
+    <EntitySet Name="Conciertos" EntityType="Self.Conciertos" />
+    <AssociationSet Name="FK__Concierto__Banda__398D8EEE" Association="Self.FK__Concierto__Banda__398D8EEE">
+      <End Role="Bandas" EntitySet="Bandas" />
+      <End Role="Conciertos" EntitySet="Conciertos" />
+    </AssociationSet>
+    <FunctionImport Name="sp_CrearConcierto">
+      <Parameter Name="BandaID" Mode="In" Type="Int32" />
+      <Parameter Name="FechaConcierto" Mode="In" Type="String" />
+      <Parameter Name="HoraConcierto" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Direccion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_EliminarConcierto">
+      <Parameter Name="ConciertoID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ModificarConcierto">
+      <Parameter Name="ConciertoID" Mode="In" Type="Int32" />
+      <Parameter Name="BandaID" Mode="In" Type="Int32" />
+      <Parameter Name="FechaConcierto" Mode="In" Type="String" />
+      <Parameter Name="HoraConcierto" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Direccion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_VerConciertos" ReturnType="Collection(MyBandTourModel.sp_VerConciertos_Result)" />
+  </EntityContainer>
+  <ComplexType Name="sp_VerConciertos_Result">
+    <Property Type="Int32" Name="ConciertoID" Nullable="false" />
+    <Property Type="String" Name="Banda" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="GeneroMusical" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FechaConcierto" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="HoraConcierto" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="Pais" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Direccion" Nullable="false" MaxLength="255" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyBandTourModelStoreContainer" CdmEntityContainer="MyBandTourEntities2">
+    <EntitySetMapping Name="Bandas">
+      <EntityTypeMapping TypeName="MyBandTourModel.Bandas">
+        <MappingFragment StoreEntitySet="Bandas">
+          <ScalarProperty Name="BandaID" ColumnName="BandaID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="GeneroMusical" ColumnName="GeneroMusical" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conciertos">
+      <EntityTypeMapping TypeName="MyBandTourModel.Conciertos">
+        <MappingFragment StoreEntitySet="Conciertos">
+          <ScalarProperty Name="ConciertoID" ColumnName="ConciertoID" />
+          <ScalarProperty Name="BandaID" ColumnName="BandaID" />
+          <ScalarProperty Name="FechaConcierto" ColumnName="FechaConcierto" />
+          <ScalarProperty Name="HoraConcierto" ColumnName="HoraConcierto" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_CrearConcierto" FunctionName="MyBandTourModel.Store.sp_CrearConcierto" />
+    <FunctionImportMapping FunctionImportName="sp_EliminarConcierto" FunctionName="MyBandTourModel.Store.sp_EliminarConcierto" />
+    <FunctionImportMapping FunctionImportName="sp_ModificarConcierto" FunctionName="MyBandTourModel.Store.sp_ModificarConcierto" />
+    <FunctionImportMapping FunctionImportName="sp_VerConciertos" FunctionName="MyBandTourModel.Store.sp_VerConciertos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyBandTourModel.sp_VerConciertos_Result">
+          <ScalarProperty Name="ConciertoID" ColumnName="ConciertoID" />
+          <ScalarProperty Name="Banda" ColumnName="Banda" />
+          <ScalarProperty Name="GeneroMusical" ColumnName="GeneroMusical" />
+          <ScalarProperty Name="FechaConcierto" ColumnName="FechaConcierto" />
+          <ScalarProperty Name="HoraConcierto" ColumnName="HoraConcierto" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

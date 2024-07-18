@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin</title>
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/js/funcionalidad.js"></script>
+    <link href="~/Content/css/estilosAdmin.css" rel="stylesheet" />
+    <script src="~/Scripts/js/logicaAdmin.js"></script>
+</head>
+
+<body onload="VerConciertosAdmin()">
+    <header>
+        <img src="~/Content/BandTour.png" alt="logo" />
+        <div>
+            <br /><br />
+            <button onclick="Desloguear()">Salir</button>
+            <button onclick="mostrarModal()">Crear</button>
+        </div>
+    </header>
+    <div>
+    </div>
+    <div id="buscar">
+        <h4>Buscar:</h4>
+        <input type="text" id="buscarBanda" placeholder="Indique el nombre de la banda" onkeyup="filtrarConciertosAdmin()" />
+        <table id="conciertosTable" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Banda</th>
+                    <th>Género Musical</th>
+                    <th>Fecha del Concierto</th>
+                    <th>Hora del Concierto</th>
+                    <th>País</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="bodyTable">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="crearModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="ocultarModal()">&times;</span>
+            <h2>Crear Concierto</h2>
+            <form id="crearConciertoForm">
+                <label for="bandaID">ID de la Banda:</label>
+                <input type="text" id="bandaID" name="bandaID" required><br><br>
+
+                <label for="fechaConcierto">Fecha del Concierto:</label>
+                <input type="text" id="fechaConcierto" name="fechaConcierto" placeholder="yyyy/mm/dd" required><br><br>
+
+                <label for="horaConcierto">Hora del Concierto:</label>
+                <input type="text" id="horaConcierto" name="horaConcierto" placeholder="hh:mm" required><br><br>
+
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required><br><br>
+
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required><br><br>
+
+                <button type="button" onclick="crearConcierto()">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
